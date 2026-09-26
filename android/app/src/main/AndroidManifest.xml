@@ -6,6 +6,11 @@
          de dados de saúde. O app nunca pede essa permissão em tempo de
          execução, e o SDK segue sem ela ("permission missing, skipping"). -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" tools:node="remove"/>
+    <!-- O Firebase Analytics traz o ID de publicidade, mas o app não exibe
+         anúncios; sem elas o Play aceita "não usa ID de publicidade". -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" tools:node="remove"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" tools:node="remove"/>
     <application
         tools:replace="android:label"
         android:label="Rota Rios"
@@ -48,6 +53,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
         <!-- flutter_background_geolocation license -->
         <meta-data
             android:name="com.transistorsoft.locationmanager.license"
