@@ -62,13 +62,5 @@
   "trackingStartHint": "Toque para iniciar o rastreamento",
   "trackingStartFailed": "Não foi possível iniciar o rastreamento. Verifique a permissão de localização.",
   "unexpectedError": "Erro inesperado ao entrar. Tente novamente.",
-  "fillCredentialsMessage": "Informe o e-mail e a senha.",
-  "updateAvailableTitle": "Atualização disponível",
-  "updateAvailableMessage": "Uma nova versão está pronta para instalar.",
-  "updateNowButton": "Atualizar",
-  "updateLaterButton": "Depois",
-  "updateDownloading": "Baixando…",
-  "updateFailed": "Não foi possível baixar a atualização. Tente mais tarde.",
-  "checkUpdateAction": "Verificar atualizações",
-  "updateUpToDate": "Você já está na versão mais recente."
+  "fillCredentialsMessage": "Informe o e-mail e a senha."
 }

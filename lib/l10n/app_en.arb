@@ -62,13 +62,5 @@
   "trackingStartHint": "Tap to start tracking",
   "trackingStartFailed": "Could not start tracking. Check the location permission.",
   "unexpectedError": "Unexpected error signing in. Please try again.",
-  "fillCredentialsMessage": "Enter your e-mail and password.",
-  "updateAvailableTitle": "Update available",
-  "updateAvailableMessage": "A new version is ready to install.",
-  "updateNowButton": "Update",
-  "updateLaterButton": "Later",
-  "updateDownloading": "Downloading…",
-  "updateFailed": "Could not download the update. Try again later.",
-  "checkUpdateAction": "Check for updates",
-  "updateUpToDate": "You already have the latest version."
+  "fillCredentialsMessage": "Enter your e-mail and password."
 }
