@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../preferences.dart';
 
 /// Ambientes da API de rastreio da TechRios.
@@ -93,12 +95,15 @@ class ApiConfig {
   };
 
   /// Trava o app num ambiente e esconde o seletor do login. Vazio deixa a
-  /// escolha visível, que é o comportamento útil em desenvolvimento.
-  /// Builds públicos devem usar `RASTREIO_ENV=producao`.
+  /// escolha visível em debug; em release o app cai em produção, para que um
+  /// build de loja nunca mostre o seletor por esquecimento do define. Um APK
+  /// de teste apontando para homologação passa `RASTREIO_ENV=homologacao`.
   static const String _forcedName = String.fromEnvironment('RASTREIO_ENV');
 
-  static ApiEnvironment? get _forced =>
-      ApiEnvironment.values.where((e) => e.name == _forcedName).firstOrNull;
+  static ApiEnvironment? get _forced {
+    final named = ApiEnvironment.values.where((e) => e.name == _forcedName).firstOrNull;
+    return named ?? (kReleaseMode ? ApiEnvironment.producao : null);
+  }
 
   static bool get canChangeEnvironment => _forced == null;
 
