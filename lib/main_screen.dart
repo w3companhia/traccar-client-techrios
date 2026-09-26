@@ -151,7 +151,7 @@ class MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'ROTA RIOS',
+                  'Rota Rios',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,

@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         const SizedBox(height: 20),
         Text(
-          'ROTA RIOS',
+          'Rota Rios',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 26,
