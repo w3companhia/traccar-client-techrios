@@ -1,4 +1,4 @@
-package org.traccar.client
+package com.w3.rotarios
 
 import io.flutter.embedding.android.FlutterActivity
 

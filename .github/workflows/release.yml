@@ -12,7 +12,7 @@ on:
         default: both
 
 env:
-  IOS_BUNDLE_ID: org.traccar.client.TraccarClient
+  IOS_BUNDLE_ID: com.w3.rotarios
 
 jobs:
   build-android:
@@ -87,11 +87,11 @@ jobs:
           script: |
             adb wait-for-device
             adb install -r flutter-apk/app-release.apk
-            adb shell am start -W -n org.traccar.client/org.traccar.client.MainActivity
+            adb shell am start -W -n com.w3.rotarios/com.w3.rotarios.MainActivity
             sleep 10
             adb shell screencap -p /sdcard/launch.png
             adb pull /sdcard/launch.png launch.png
-            adb shell pidof org.traccar.client > /dev/null || { echo "App process not running after launch — crashed."; exit 1; }
+            adb shell pidof com.w3.rotarios > /dev/null || { echo "App process not running after launch — crashed."; exit 1; }
 
       - uses: actions/upload-artifact@v5
         with:
@@ -112,7 +112,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: org.traccar.client
+          packageName: com.w3.rotarios
           releaseFiles: flutter-apk/app-release.apk
           mappingFile: mapping/release/mapping.txt
           track: production

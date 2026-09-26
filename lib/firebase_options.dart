@@ -50,23 +50,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD5uSOXpbWkR8C3fqdNKQcI7BJrPObpeP4',
-    appId: '1:39016471396:android:b1c7194c699bfa25',
-    messagingSenderId: '39016471396',
-    projectId: 'traccar-client-app',
-    databaseURL: 'https://traccar-client-app.firebaseio.com',
-    storageBucket: 'traccar-client-app.firebasestorage.app',
+    apiKey: 'AIzaSyCmc4QQ1o_YRzi9HDqLazwe4Da_gcOWE3s',
+    appId: '1:361224548433:android:1dc5f96907d80c599c4870',
+    messagingSenderId: '361224548433',
+    projectId: 'rota-rios-app',
+    storageBucket: 'rota-rios-app.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBEdxpKXTvJJfYDh28OLffAk4z7S7caf08',
-    appId: '1:39016471396:ios:78cbbf5775b43308',
-    messagingSenderId: '39016471396',
-    projectId: 'traccar-client-app',
-    databaseURL: 'https://traccar-client-app.firebaseio.com',
-    storageBucket: 'traccar-client-app.firebasestorage.app',
-    iosClientId: '39016471396-7mdutolor3h210bm9qmf60gp18lmmhnm.apps.googleusercontent.com',
-    iosBundleId: 'org.traccar.client.TraccarClient',
+    apiKey: 'AIzaSyCNXCkZmwRDKCA689YmLFbhuOXG949jsHE',
+    appId: '1:361224548433:ios:4fc4a1ed6449fac59c4870',
+    messagingSenderId: '361224548433',
+    projectId: 'rota-rios-app',
+    storageBucket: 'rota-rios-app.firebasestorage.app',
+    iosBundleId: 'com.w3.rotarios',
   );
-
 }
