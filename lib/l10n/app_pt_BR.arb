@@ -63,12 +63,13 @@
   "trackingStartFailed": "Não foi possível iniciar o rastreamento. Verifique a permissão de localização.",
   "unexpectedError": "Erro inesperado ao entrar. Tente novamente.",
   "fillCredentialsMessage": "Informe o e-mail e a senha.",
-  "updateAvailableTitle": "Atualização disponível",
-  "updateAvailableMessage": "Uma nova versão está pronta para instalar.",
-  "updateNowButton": "Atualizar",
-  "updateLaterButton": "Depois",
-  "updateDownloading": "Baixando…",
-  "updateFailed": "Não foi possível baixar a atualização. Tente mais tarde.",
-  "checkUpdateAction": "Verificar atualizações",
-  "updateUpToDate": "Você já está na versão mais recente."
+  "permissionSetupAction": "Verificar permissões de rastreamento",
+  "permissionSetupTitle": "Rastreamento confiável",
+  "permissionSetupIntro": "O Android pode parar o rastreamento em segundo plano se estas duas opções não estiverem ativadas.",
+  "batteryOptimizationStepLabel": "Ignorar otimização de bateria",
+  "batteryOptimizationButton": "Permitir",
+  "backgroundLocationStepLabel": "Localização em segundo plano",
+  "backgroundLocationButton": "Abrir configurações",
+  "backgroundLocationInstructions": "Na próxima tela, toque em Permissões → Localização → Permitir o tempo todo.",
+  "permissionSetupSkipButton": "Agora não"
 }

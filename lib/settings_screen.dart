@@ -8,11 +8,9 @@ import 'package:traccar_client/qr_code_screen.dart';
 
 import 'geolocation_service.dart';
 import 'l10n/app_localizations.dart';
-import 'app_info.dart';
+import 'permission_setup_screen.dart';
 import 'preferences.dart';
 import 'status_screen.dart';
-import 'update_dialog.dart';
-import 'update_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -200,23 +198,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               MaterialPageRoute(builder: (_) => const StatusScreen()),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.system_update_outlined),
-            title: Text(AppLocalizations.of(context)!.checkUpdateAction),
-            subtitle: Text('v${AppInfo.version}'),
-            onTap: () async {
-              final localizations = AppLocalizations.of(context)!;
-              final versao = await UpdateService.verificar();
-              if (!context.mounted) return;
-              if (versao == null) {
-                messengerKey.currentState?.showSnackBar(
-                  SnackBar(content: Text(localizations.updateUpToDate)),
-                );
-                return;
-              }
-              await UpdateDialog.mostrar(context, versao);
-            },
-          ),
+          if (Platform.isAndroid)
+            ListTile(
+              leading: const Icon(Icons.battery_saver_outlined),
+              title: Text(AppLocalizations.of(context)!.permissionSetupAction),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const PermissionSetupScreen()),
+              ),
+            ),
           const Divider(height: 1),
           // O identificador vem da embarcacao selecionada e a URL do servidor
           // e fixa no app, entao nenhum dos dois e editavel aqui.
