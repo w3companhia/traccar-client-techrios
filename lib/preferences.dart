@@ -22,6 +22,12 @@ class Preferences {
   static const String preferPlatformProviders = 'prefer_platform_providers';
   static const String password = 'password';
 
+  /// Controla a migração forçada de configuração abaixo — some dispositivos
+  /// tinham valores antigos (ex: precisão média, intervalo de 300s) e a
+  /// operação decidiu padronizar todo mundo, inclusive quem já rastreava.
+  static const String operationalDefaultsVersion = 'operational_defaults_version';
+  static const int _currentOperationalDefaultsVersion = 1;
+
   // Seleção vinda da API de rastreio da TechRios.
   static const String empresaId = 'empresa_id';
   static const String empresaNome = 'empresa_nome';
@@ -46,7 +52,7 @@ class Preferences {
       cacheOptions: SharedPreferencesWithCacheOptions(
         allowList: {
           id, url, accuracy, distance, interval, angle, heartbeat, buffer, wakelock, stopDetection, preferPlatformProviders, password,
-          empresaId, empresaNome, embarcacaoId, embarcacaoNome, usuarioNome, ambiente,
+          empresaId, empresaNome, embarcacaoId, embarcacaoNome, usuarioNome, ambiente, operationalDefaultsVersion,
         },
       ),
     );
@@ -64,11 +70,21 @@ class Preferences {
     if (instance.getString(id) == null) {
       await instance.setString(id, (Random().nextInt(90000000) + 10000000).toString());
       await instance.setString(url, defaultServerUrl);
-      await instance.setString(accuracy, 'medium');
-      await instance.setInt(interval, 300);
-      await instance.setInt(distance, 75);
+    }
+    // Aplica uma vez só, mesmo em quem já rastreava com outros valores —
+    // depois disso o usuário pode alterar livremente sem ser sobrescrito de
+    // novo a cada abertura do app.
+    if ((instance.getInt(operationalDefaultsVersion) ?? 0) < _currentOperationalDefaultsVersion) {
+      await instance.setString(accuracy, 'highest');
+      await instance.setInt(distance, 40);
+      await instance.setInt(interval, 30);
+      await instance.setInt(angle, 0);
+      await instance.setInt(heartbeat, 0);
       await instance.setBool(buffer, true);
+      await instance.setBool(wakelock, true);
       await instance.setBool(stopDetection, true);
+      await instance.setBool(preferPlatformProviders, false);
+      await instance.setInt(operationalDefaultsVersion, _currentOperationalDefaultsVersion);
     }
   }
 
@@ -83,13 +99,13 @@ class Preferences {
           'low' => Accuracy.low,
           _ => Accuracy.medium,
         },
-        distanceMeters: instance.getInt(distance) ?? 75,
-        intervalSeconds: instance.getInt(interval) ?? 300,
+        distanceMeters: instance.getInt(distance) ?? 40,
+        intervalSeconds: instance.getInt(interval) ?? 30,
         angleDegrees: instance.getInt(angle) ?? 0,
         heartbeatIntervalSeconds: instance.getInt(heartbeat) ?? 0,
         stopDetection: instance.getBool(stopDetection) ?? true,
       ),
-      wakeLock: instance.getBool(wakelock) ?? false,
+      wakeLock: instance.getBool(wakelock) ?? true,
       buffer: instance.getBool(buffer) ?? true,
       preferPlatformProviders: instance.getBool(preferPlatformProviders) ?? false,
     );
