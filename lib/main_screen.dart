@@ -9,6 +9,7 @@ import 'package:traccar_client/preferences.dart';
 
 import 'geolocation_service.dart';
 import 'l10n/app_localizations.dart';
+import 'permission_setup_screen.dart';
 import 'selection_flow.dart';
 import 'session_service.dart';
 import 'settings_screen.dart';
@@ -106,6 +107,17 @@ class MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     // nas configurações do sistema, ou o serviço morto pelo Android. Age-se
     // sobre o estado real, não sobre o que a tela mostrava.
     final tracking = await GeolocationService.tracker.isTracking();
+
+    // Ligando: sem essas duas permissões o Android mata o rastreamento em
+    // segundo plano silenciosamente, sem erro nenhum pro usuário perceber.
+    if (!tracking && !await PermissionSetupScreen.isSatisfied()) {
+      if (!mounted) return;
+      await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const PermissionSetupScreen()),
+      );
+      if (!mounted) return;
+    }
 
     if (tracking) {
       FirebaseCrashlytics.instance.log('tracking_toggle_stop');

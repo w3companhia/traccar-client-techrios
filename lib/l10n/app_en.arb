@@ -62,5 +62,14 @@
   "trackingStartHint": "Tap to start tracking",
   "trackingStartFailed": "Could not start tracking. Check the location permission.",
   "unexpectedError": "Unexpected error signing in. Please try again.",
-  "fillCredentialsMessage": "Enter your e-mail and password."
+  "fillCredentialsMessage": "Enter your e-mail and password.",
+  "permissionSetupAction": "Check tracking permissions",
+  "permissionSetupTitle": "Reliable tracking",
+  "permissionSetupIntro": "Android can stop tracking in the background unless these two settings are enabled.",
+  "batteryOptimizationStepLabel": "Ignore battery optimization",
+  "batteryOptimizationButton": "Allow",
+  "backgroundLocationStepLabel": "Background location",
+  "backgroundLocationButton": "Open settings",
+  "backgroundLocationInstructions": "On the next screen, tap Permissions → Location → Allow all the time.",
+  "permissionSetupSkipButton": "Not now"
 }

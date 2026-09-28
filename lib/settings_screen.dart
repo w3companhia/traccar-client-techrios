@@ -8,6 +8,7 @@ import 'package:traccar_client/qr_code_screen.dart';
 
 import 'geolocation_service.dart';
 import 'l10n/app_localizations.dart';
+import 'permission_setup_screen.dart';
 import 'preferences.dart';
 import 'status_screen.dart';
 
@@ -197,6 +198,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               MaterialPageRoute(builder: (_) => const StatusScreen()),
             ),
           ),
+          if (Platform.isAndroid)
+            ListTile(
+              leading: const Icon(Icons.battery_saver_outlined),
+              title: Text(AppLocalizations.of(context)!.permissionSetupAction),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const PermissionSetupScreen()),
+              ),
+            ),
           const Divider(height: 1),
           // O identificador vem da embarcacao selecionada e a URL do servidor
           // e fixa no app, entao nenhum dos dois e editavel aqui.
@@ -232,7 +242,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           if (advanced && Platform.isAndroid)
             SwitchListTile(
               title: Text(AppLocalizations.of(context)!.wakelockLabel),
-              value: Preferences.instance.getBool(Preferences.wakelock) ?? false,
+              value: Preferences.instance.getBool(Preferences.wakelock) ?? true,
               onChanged: (value) async {
                 await Preferences.instance.setBool(Preferences.wakelock, value);
                 await GeolocationService.tracker.setConfig(Preferences.buildConfig());
