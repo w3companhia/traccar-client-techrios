@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:traccar_client/main.dart';
 import 'package:traccar_client/password_service.dart';
 import 'package:traccar_client/preferences.dart';
@@ -108,15 +110,57 @@ class MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     // sobre o estado real, não sobre o que a tela mostrava.
     final tracking = await GeolocationService.tracker.isTracking();
 
-    // Ligando: sem essas duas permissões o Android mata o rastreamento em
-    // segundo plano silenciosamente, sem erro nenhum pro usuário perceber.
-    if (!tracking && !await PermissionSetupScreen.isSatisfied()) {
-      if (!mounted) return;
-      await Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const PermissionSetupScreen()),
-      );
-      if (!mounted) return;
+    if (!tracking) {
+      // isTracking() só diz se o serviço está rodando, não se ele consegue
+      // posição de verdade — sem permissão ou com o GPS desligado o botão
+      // acendia mesmo sem nenhuma localização sair, um falso positivo.
+      final locationPermission = await Permission.locationWhenInUse.request();
+      if (!locationPermission.isGranted) {
+        if (!mounted) return;
+        messengerKey.currentState?.showSnackBar(
+          SnackBar(
+            content: Text(localizations.trackingStartFailed),
+            duration: const Duration(seconds: 4),
+          ),
+        );
+        return;
+      }
+
+      // Sem essas duas permissões o Android mata o rastreamento em segundo
+      // plano silenciosamente, sem erro nenhum pro usuário perceber.
+      if (!await PermissionSetupScreen.isSatisfied()) {
+        if (!mounted) return;
+        await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const PermissionSetupScreen()),
+        );
+        if (!mounted) return;
+      }
+
+      if (await Permission.location.serviceStatus != ServiceStatus.enabled) {
+        if (!mounted) return;
+        final openSettings = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(localizations.gpsDisabledTitle),
+            content: Text(localizations.gpsDisabledMessage),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text(localizations.cancelButton),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(localizations.openLocationSettingsButton),
+              ),
+            ],
+          ),
+        );
+        if (openSettings == true) {
+          await AppSettings.openAppSettings(type: AppSettingsType.location);
+        }
+        return;
+      }
     }
 
     if (tracking) {

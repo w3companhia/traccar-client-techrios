@@ -71,5 +71,8 @@
   "backgroundLocationStepLabel": "Localização em segundo plano",
   "backgroundLocationButton": "Abrir configurações",
   "backgroundLocationInstructions": "Na próxima tela, toque em Permissões → Localização → Permitir o tempo todo.",
-  "permissionSetupSkipButton": "Agora não"
+  "permissionSetupSkipButton": "Agora não",
+  "gpsDisabledTitle": "Localização desativada",
+  "gpsDisabledMessage": "Ative a localização (GPS) do aparelho para começar a rastrear.",
+  "openLocationSettingsButton": "Abrir configurações de localização"
 }

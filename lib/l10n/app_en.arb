@@ -71,5 +71,8 @@
   "backgroundLocationStepLabel": "Background location",
   "backgroundLocationButton": "Open settings",
   "backgroundLocationInstructions": "On the next screen, tap Permissions → Location → Allow all the time.",
-  "permissionSetupSkipButton": "Not now"
+  "permissionSetupSkipButton": "Not now",
+  "gpsDisabledTitle": "Location is off",
+  "gpsDisabledMessage": "Turn on the device's location (GPS) to start tracking.",
+  "openLocationSettingsButton": "Open location settings"
 }
