@@ -20,7 +20,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.w3.rotarios"
-    compileSdk = 37
+    compileSdkVersion("android-37.0")
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
